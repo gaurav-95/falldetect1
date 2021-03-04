@@ -105,7 +105,7 @@ def get_model():
 print("Loading Keras Model..")
 get_model()
 
-
+@app.route('/', methods=['GET'])
 def get_accdata():
     resp = request.get_json(force="True")
     return Response(resp, mimetype="application/json", status=200)
