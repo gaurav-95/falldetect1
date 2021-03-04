@@ -3,18 +3,8 @@ import pandas as pd
 import tensorflow as tf
 from flask import Flask, request, jsonify, Response
 from sklearn.preprocessing import StandardScaler, MaxAbsScaler
-from flask_mongoengine import MongoEngine
 
 app = Flask(__name__)
-
-app.config['MONGODB_SETTINGS'] = {
-    'db': 'your_database',
-    'host': 'localhost',
-    'port': 27017
-}
-db = MongoEngine()
-db.init_app(app)
-
 
 #Prepare function to preprocess incoming json data
 def prepare(incoming):
@@ -108,7 +98,6 @@ get_model()
 @app.route('/', methods=['GET'])
 def get_accdata():
     resp = request.get_json(force="True")
-    return Response(resp, mimetype="application/json", status=200)
 
 
 #Run the prediction model
