@@ -1,2 +1,2 @@
-# falldetect1
-Fall detection model using smartphone accelerometer data
+# Fall Detect v2 (8 Frame) 100Hz accelerometer xyz non-linear
+Author: Gourab Hazra

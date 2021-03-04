@@ -1,0 +1,6 @@
+Flask
+gunicorn
+numpy
+pandas
+sklearn
+tensorflow
