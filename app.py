@@ -1,7 +1,7 @@
 import numpy as np
 import pandas as pd
 import tensorflow as tf
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, Response
 from sklearn.preprocessing import StandardScaler, MaxAbsScaler
 from flask_mongoengine import MongoEngine
 
@@ -14,6 +14,7 @@ app.config['MONGODB_SETTINGS'] = {
 }
 db = MongoEngine()
 db.init_app(app)
+
 
 #Prepare function to preprocess incoming json data
 def prepare(incoming):
@@ -104,15 +105,21 @@ def get_model():
 print("Loading Keras Model..")
 get_model()
 
+
+def get_accdata():
+    resp = request.get_json(force="True")
+    return Response(resp, mimetype="application/json", status=200)
+
+
 #Run the prediction model
 @app.route('/predict',methods=['POST'])
 def predict():
     '''
     Fetch Data from API, call prepare function to preprocess, get prediction in json
     '''
-    response = request.get_json(force="True")
+    data = get_accdata()
     #Feed response into prepare function
-    prepare(response)
+    prepare(data)
 
     prediction = model.predict_classes(X)
 
