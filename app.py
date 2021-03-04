@@ -3,8 +3,17 @@ import pandas as pd
 import tensorflow as tf
 from flask import Flask, request, jsonify
 from sklearn.preprocessing import StandardScaler, MaxAbsScaler
+from flask_mongoengine import MongoEngine
 
 app = Flask(__name__)
+
+app.config['MONGODB_SETTINGS'] = {
+    'db': 'your_database',
+    'host': 'localhost',
+    'port': 27017
+}
+db = MongoEngine()
+db.init_app(app)
 
 #Prepare function to preprocess incoming json data
 def prepare(incoming):
