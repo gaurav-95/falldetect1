@@ -89,7 +89,7 @@ def prepare(incoming):
 #Load model in a function so its not reloaded
 def get_model():
     global model
-    model = tf.keras.models.load_model("./models/fall_detect1.h5")
+    model = tf.keras.models.load_model("./fall_detect1.h5")
     print("Fall model Loaded!")
 
 print("Loading Keras Model..")
